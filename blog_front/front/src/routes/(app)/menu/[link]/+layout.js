@@ -1,14 +1,27 @@
 import axios from 'axios';
 import cheerio from "cheerio";
-import { back_api,category_list } from '$lib/const';
+import { back_api, category_list, siteName } from '$lib/const';
 import moment from "moment-timezone";
 
 export const prerender = false;
 
 export const load = async ({ params, fetch, url }) => {
 
+
     const { link } = params
+    let category = ""
     let posts = [];
+    let seoValue = {
+        title: "",
+        description : '부동산 분양의 모든것! 아파트 분양, 오피스텔 분양, 상가 분양, 지식산업센터 분양 등 현재 진행중인 분양 및 청약, 미분양 정보 안내',
+        url: url.href,
+        image : `${url.href}logo.png`,
+        date : '23-12-07',
+        published_time : '2023-12-07T11:46:53+00:00',
+        icon: `${url.origin}/favicon.png`,
+    }
+    
+
 
     try {
 
@@ -34,11 +47,23 @@ export const load = async ({ params, fetch, url }) => {
             posts[i]["category"] = getCategoryObj['name']
         }
 
+        const getCategoryObj = category_list.find(v => v.link === link);
+        category = getCategoryObj['name']
+
+        seoValue.title = `${siteName} - ${category}`
+
     } catch (error) {
 
     }
 
 
 
-    return { posts }
+
+
+
+
+
+
+
+    return { posts, category, seoValue }
 }

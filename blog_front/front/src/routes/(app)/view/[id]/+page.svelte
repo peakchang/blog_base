@@ -103,13 +103,10 @@
     async function imgApiChk() {
         try {
             const getId = $page.params.id;
-            console.log(getId);
-
             const res = axios.post(`${back_api}/board/modify_api_img`, {
                 getId,
             });
         } catch (error) {}
-        console.log($page);
     }
 </script>
 

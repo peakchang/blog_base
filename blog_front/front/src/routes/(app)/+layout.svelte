@@ -4,17 +4,19 @@
 	import "$src/app.pcss";
 	import axios from "axios";
 	import { afterNavigate, goto } from "$app/navigation";
-	import { authStatus, seoValue } from "$lib/store";
+	import { authStatus } from "$lib/store";
 	import Cookies from "js-cookie";
 	import { back_api, category_list, siteName } from "$src/lib/const";
 	import { page } from "$app/stores";
+	import SeoMeta from "$lib/components/SeoMeta.svelte";
 
+	let seoValue = {};
 	export let data;
 
 	$: data, setData();
 
 	function setData() {
-		$seoValue = data.seoValue;
+		seoValue = data.seoValue;
 	}
 
 	afterNavigate(async () => {
@@ -38,41 +40,25 @@
 
 <svelte:head>
 	{#if $page.url.pathname == "/"}
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<title>{$seoValue.title}</title>
-		<meta name="title" content={$seoValue.title} />
-		<meta name="description" content={$seoValue.description} />
-		<link rel="icon" href={$seoValue.icon} />
-		<meta property="og:title" content={$seoValue.title} />
-		<meta property="og:url" content={$seoValue.url} />
-		<meta property="og:type" content="blog" />
-		<meta property="og:description" content={$seoValue.description} />
-		<meta property="og:image" content={$seoValue.image} />
-		<meta name="date" content={$seoValue.date} />
-		<meta
-			property="article:published_time"
-			content={$seoValue.published_time}
-		/>
-		<meta
-			name="naver-site-verification"
-			content="28132e9c935c914b3823c502418d6fcb424e1399"
-		/>
-
-		<!-- SUIT 폰트 CSS -->
-		<link
-			href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css"
-			rel="stylesheet"
-		/>
-		<link
-			href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
-			rel="stylesheet"
-		/>
+		<SeoMeta bind:seoValue />
 	{/if}
+
+	<!-- SUIT 폰트 CSS -->
+	<link
+		href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css"
+		rel="stylesheet"
+	/>
+	<link
+		href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+		rel="stylesheet"
+	/>
 </svelte:head>
 
 <header>
 	<div
 		class="mt-8 pb-4 text-4xl text-center border-b border-gray-300 title-font relative"
+		data-sveltekit-preload-data="tap"
+		data-sveltekit-reload
 	>
 		<a href="/">
 			<div class="flex justify-center gap-2 max-w-xs mx-auto">
@@ -86,6 +72,7 @@
 			<ul
 				class="flex justify-center gap-8 py-2"
 				data-sveltekit-preload-data="tap"
+				data-sveltekit-reload
 			>
 				{#each category_list as category}
 					<li class="cursor-pointer">

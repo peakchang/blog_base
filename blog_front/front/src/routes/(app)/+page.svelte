@@ -5,7 +5,6 @@
     import { afterNavigate, goto } from "$app/navigation";
     import { authStatus } from "$lib/store";
 
-    import SeoMeta from "$lib/components/SeoMeta.svelte";
     import { page } from "$app/stores";
 
     import { invalidateAll } from "$app/navigation";
@@ -23,17 +22,6 @@
     function setData() {
         posts = data.posts;
     }
-
-    let seoValue = {
-        title: siteName,
-        description:
-            "유머, 연예, IT, 건강 등 다양한 정보를 나르는 기쁨가득 샤크맨 블로그",
-        keywords: "유머,연예,IT,건강",
-        url: $page.url.origin,
-        image: `${$page.url.origin}/logo.png`,
-        published_time: "2023-4-29T05:48:25+00:00",
-        modified_time: "2023-6-26T09:39:40+00:00",
-    };
 
     afterNavigate(() => {
         invalidateAll();
@@ -82,9 +70,7 @@
     }
 </script>
 
-<svelte:head>
-    
-</svelte:head>
+<svelte:head></svelte:head>
 
 <div class="max_screen mx-auto px-2 pb-8 mt-2">
     <h1 class="sr-only">{siteName}</h1>
@@ -117,40 +103,44 @@
         {siteName} 최신글 리스트
     </div>
 
-    {#each posts as post}
-        <a href="/view/{post.bo_id}">
-            <div
-                class="flex h-26 overflow-hidden border border-gray-300 rounded-lg mb-2 suit-font"
-            >
+    <div data-sveltekit-preload-data="tap" data-sveltekit-reload>
+        {#each posts as post}
+            <a href="/view/{post.bo_id}">
                 <div
-                    class="float-left w-2/6"
-                    style="max-width: 220px; max-height:100px;"
+                    class="flex h-26 overflow-hidden border border-gray-300 rounded-lg mb-2 suit-font"
                 >
                     <div
-                        class="h-full flex items-center justify-center overflow-hidden"
+                        class="float-left w-2/6"
+                        style="max-width: 220px; max-height:100px;"
                     >
-                        <img src={post.img_link} alt="asdfasdf" />
+                        <div
+                            class="h-full flex items-center justify-center overflow-hidden"
+                        >
+                            <img src={post.img_link} alt="asdfasdf" />
+                        </div>
                     </div>
-                </div>
 
-                <div
-                    class=" w-4/6 px-4 py-1 flex flex-col justify-center gap-2 text-sm"
-                >
-                    <div>
-                        <span class="font-semibold text-base truncate">
-                            {post.bo_subject}
-                        </span>
-                        <span class="text-xs text-gray-600"
-                            >{post.category} / {post.date_str}
-                        </span>
-                    </div>
-                    <div class="h-10 text-ellipsis overflow-hidden box-over">
-                        {post.text}
+                    <div
+                        class=" w-4/6 px-4 py-1 flex flex-col justify-center gap-2 text-sm"
+                    >
+                        <div>
+                            <span class="font-semibold text-base truncate">
+                                {post.bo_subject}
+                            </span>
+                            <span class="text-xs text-gray-600"
+                                >{post.category} / {post.date_str}
+                            </span>
+                        </div>
+                        <div
+                            class="h-10 text-ellipsis overflow-hidden box-over"
+                        >
+                            {post.text}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </a>
-    {/each}
+            </a>
+        {/each}
+    </div>
 
     {#if listStatus}
         <div class="text-center mt-6">

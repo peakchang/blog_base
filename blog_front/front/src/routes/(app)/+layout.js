@@ -7,7 +7,6 @@ import moment from "moment-timezone";
 export const load = async ({ fetch, url }) => {
 
     let posts = []
-    console.log(url);
 
     try {
         const res = await axios.get(`${back_api}/main/base`)
@@ -43,8 +42,6 @@ export const load = async ({ fetch, url }) => {
         published_time : '2023-12-07T11:46:53+00:00',
         icon : `${url.href}favicon.png`,
     }
-
-    console.log(seoValue);
 
     return { posts, seoValue }
 }
