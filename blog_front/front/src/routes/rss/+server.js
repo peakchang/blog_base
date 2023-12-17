@@ -14,8 +14,9 @@ export async function GET({ url }) {
         boardList = getBoardList[0]
 
         for (let l = 0; l < boardList.length; l++) {
-
-            console.log(boardList[l]['bo_content']);
+            if(l == 0){
+                lastBuildDate = boardList[l]['bo_created_at']
+            }
             const textOnly = boardList[l]['bo_content'].replace(/<[^>]+>/g, ' ');
             boardList[l]['content_txt'] = textOnly.replace(/\s+/g, ' ').trim();
 
@@ -27,10 +28,6 @@ export async function GET({ url }) {
             <guid>${url.origin}/view/${boardList[l]['bo_id']}</guid>
             </item>
             `
-
-            console.log(template);
-
-            lastBuildDate = boardList[l]['bl_created_at']
             postXmlStr = postXmlStr + template
         }
 
