@@ -18,9 +18,10 @@ export async function GET({ url }) {
             console.log(getTimeStr);
 
             // date
-            const date = new Date(getTimeStr);
-            const dateStr = moment.tz(date, 'Asia/Seoul');
-            const getDate = dateStr.format('YYYY-MM-DDTHH:mm:ss+00:00');
+            // const date = new Date(getTimeStr);
+            const dateStr = moment.tz(getTimeStr, 'Asia/Seoul');
+            console.log(dateStr);
+            const getDate = dateStr.format('YYYY-MM-DDTHH:mm:ssZ');
 
             let template = `
             <url>
