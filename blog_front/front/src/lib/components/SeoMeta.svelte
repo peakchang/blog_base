@@ -14,7 +14,4 @@
 <meta property="og:image" content={seoValue.image} />
 <meta name="date" content={seoValue.date} />
 <meta property="article:published_time" content={seoValue.published_time} />
-<meta
-    name="naver-site-verification"
-    content="28132e9c935c914b3823c502418d6fcb424e1399"
-/>
+<meta name="naver-site-verification" content="aeaa8b0a95f9ad588c9ee647a0775d900b32e2ff" />
