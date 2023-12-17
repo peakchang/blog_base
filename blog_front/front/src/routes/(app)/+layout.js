@@ -14,8 +14,11 @@ export const load = async ({ fetch, url }) => {
 
 
         for (let i = 0; i < posts.length; i++) {
-            console.log(posts[i].bo_created_at);
-            const dateStr = moment.tz(posts[i].bo_created_at, 'Asia/Seoul');
+
+            const getTimeStr = posts[i]['bo_updated_at'] ? posts[i]['bo_updated_at'] : posts[i]['bo_created_at']
+            console.log(getTimeStr);
+            const dateStr = moment.tz(getTimeStr, 'Asia/Seoul');
+            console.log(dateStr);
             posts[i]["date_str"] = dateStr.format('YYYY-MM-DD HH:mm');
 
             const $ = cheerio.load(posts[i]["bo_content"]);
