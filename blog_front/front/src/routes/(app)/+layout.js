@@ -14,6 +14,7 @@ export const load = async ({ fetch, url }) => {
 
 
         for (let i = 0; i < posts.length; i++) {
+            console.log(posts[i].bo_created_at);
             const dateStr = moment.tz(posts[i].bo_created_at, 'Asia/Seoul');
             posts[i]["date_str"] = dateStr.format('YYYY-MM-DD HH:mm');
 
