@@ -16,10 +16,13 @@ export const load = async ({ fetch, url }) => {
         for (let i = 0; i < posts.length; i++) {
 
             const getTimeStr = posts[i]['bo_updated_at'] ? posts[i]['bo_updated_at'] : posts[i]['bo_created_at']
+            console.log('DB에서 불러온 시간 데이터는?');
             console.log(getTimeStr);
-            const dateStr = moment.tz(getTimeStr, 'Asia/Seoul');
-            console.log(dateStr);
-            posts[i]["date_str"] = dateStr.format('YYYY-MM-DD HH:mm');
+            // const dateStr = moment.tz(getTimeStr, 'Asia/Seoul');
+            // console.log(dateStr);
+            posts[i]["date_str"] = moment(getTimeStr).format('YYYY-MM-DD HH:mm');
+            console.log('변환한 시간 데이터는?');
+            console.log(posts[i]["date_str"]);
 
             const $ = cheerio.load(posts[i]["bo_content"]);
             const imageTag = $("img");
