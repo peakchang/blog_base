@@ -50,7 +50,7 @@ if (process.env.NODE_ENV === 'production') {
 
 let corsOptions = {
     // 여기는 svelte (프론트엔드) 가 돌아가는 주소
-    origin: /\.allthatby\.co.kr$/,
+    origin: [/\.allthatby\.co.kr$/, 'https://allthatby.co.kr/'],
     credentials: true
 }
 app.use(cors(corsOptions));
