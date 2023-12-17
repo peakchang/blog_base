@@ -34,7 +34,7 @@ export const load = async ({ params, fetch, url }) => {
             // 날짜
             const getTimeStr = posts[i]['bo_updated_at'] ? posts[i]['bo_updated_at'] : posts[i]['bo_created_at']
             const dateStr = moment.tz(getTimeStr, 'Asia/Seoul');
-            posts[i]["date_str"] = dateStr.format('YYYY-MM-DDTHH:mm:ssZ');
+            posts[i]["date_str"] = dateStr.format('YYYY-MM-DD HH:mm:ss');
 
 
 
