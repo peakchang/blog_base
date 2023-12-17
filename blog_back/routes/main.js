@@ -99,6 +99,8 @@ mainRouter.get('/base', async (req, res, next) => {
         console.error(error.message);
     }
 
+    console.log(get_post_list);
+
     res.json({ get_post_list })
 })
 
