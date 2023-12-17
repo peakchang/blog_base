@@ -4,7 +4,7 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "start": "cross-env NODE_ENV=production PORT=3090 pm2 start server.js -i 0 --name by-front",
+    "start": "cross-env NODE_ENV=production PORT=3090 pm2 start server.js -i 0 --name by-front3090",
     "dev": "nodemon server"
   },
   "keywords": [],
