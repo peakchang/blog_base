@@ -51,7 +51,19 @@ let corsOptions = {
     origin: /\.example\.com$/,
     credentials: true
 }
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors({
+    origin: (origin, callback) => {
+        // 이 함수를 사용하여 허용할 도메인을 지정
+        if (origin && origin.match(/\.*\.example\.com$/)) {
+            callback(null, true); // 와일드카드 서브도메인 허용
+        } else {
+            callback(new Error('CORS 에러: 허용되지 않은 도메인'), false);
+        }
+    },
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // 필요한 경우 요청 헤더에 credentials을 포함시킵니다.
+}));
 
 app.enable('trust proxy');
 
