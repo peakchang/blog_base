@@ -38,11 +38,14 @@ app.use('/image', express.static(path.join(__dirname, 'public/uploads/image')));
 
 let originLink;
 if (process.env.NODE_ENV === 'production') {
-    originLink = process.env.SITE_LINK
+    const whiteListStr = process.env.SITE_LINK
+    console.log(whiteListStr);
+    const whiteListArr = whiteListStr.split(',');
+    originLink = whiteListArr
 } else {
     originLink = '*'
 }
-console.log(originLink);
+
 let corsOptions = {
     // 여기는 svelte (프론트엔드) 가 돌아가는 주소
     origin: originLink,
@@ -64,6 +67,7 @@ app.use('/api/v3', apiRouter);
 
 
 app.use('/', (req, res) => {
+    console.log(originLink);
     res.send('백엔드 생성 완료!!')
 });
 
