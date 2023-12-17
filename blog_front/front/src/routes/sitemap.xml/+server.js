@@ -15,10 +15,12 @@ export async function GET({ url }) {
             // published_time
             const getTimeStr = boardList[i]['bo_updated_at'] ? boardList[i]['bo_updated_at'] : boardList[i]['bo_created_at']
 
+            console.log(getTimeStr);
+
             // date
             const date = new Date(getTimeStr);
             const dateStr = moment.tz(date, 'Asia/Seoul');
-            const getDate = dateStr.format('YYYY-MM-DD');
+            const getDate = dateStr.format('YYYY-MM-DDTHH:mm:ss+00:00');
 
             let template = `
             <url>
