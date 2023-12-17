@@ -4,14 +4,16 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "start": "cross-env NODE_ENV=production PORT=3000 pm2 start server.js -i 0 --name ht-front",
+    "start": "cross-env NODE_ENV=production PORT=3090 pm2 start server.js -i 0 --name by-front",
     "dev": "nodemon server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cross-env": "^7.0.3",
     "express": "^4.18.2",
-    "nodemon": "^3.0.2"
+    "nodemon": "^3.0.2",
+    "pm2": "^5.3.0"
   }
 }
