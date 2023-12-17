@@ -11,4 +11,4 @@ export const category_list = [
 
 export const siteName = '기쁨 가득 샤크맨'
 
-export const back_api = `${import.meta.env.VITE_SERVER_URL}/api/v7`
+export const back_api = `${import.meta.env.VITE_SERVER_URL}/api/v3`

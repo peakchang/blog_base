@@ -8,9 +8,12 @@ const subviewRouter = express.Router();
 
 
 subviewRouter.post('/', async (req, res, next) => {
+    console.log('여기는 들어와??');
     let status = true;
+    console.log(req.body);
     console.log(req.body.subDomainName);
-    res.json({ status })
+    const subDomainName = req.body.subDomainName
+    res.json({ status, subDomainName })
 })
 
 
