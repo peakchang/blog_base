@@ -3,7 +3,7 @@ import path from 'path';
 import cors from 'cors';
 import dotenv from 'dotenv';
 const app = express();
-
+import { sql_con } from './back-lib/db.js'
 
 dotenv.config();
 
@@ -37,33 +37,23 @@ app.use('/editor', express.static(path.join(__dirname, 'public/uploads/editor'))
 app.use('/image', express.static(path.join(__dirname, 'public/uploads/image')));
 
 let originLink;
+
+
 if (process.env.NODE_ENV === 'production') {
     const whiteListStr = process.env.SITE_LINK
     console.log(whiteListStr);
     const whiteListArr = whiteListStr.split(',');
-    originLink = []
+    originLink = whiteListArr
 } else {
     originLink = '*'
 }
 
 let corsOptions = {
     // 여기는 svelte (프론트엔드) 가 돌아가는 주소
-    origin: /\.example\.com$/,
+    origin: true,
     credentials: true
 }
-// app.use(cors(corsOptions));
-app.use(cors({
-    origin: (origin, callback) => {
-        // 이 함수를 사용하여 허용할 도메인을 지정
-        if (origin && origin.match(/\.*\.example\.com$/)) {
-            callback(null, true); // 와일드카드 서브도메인 허용
-        } else {
-            callback(new Error('CORS 에러: 허용되지 않은 도메인'), false);
-        }
-    },
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // 필요한 경우 요청 헤더에 credentials을 포함시킵니다.
-}));
+app.use(cors(corsOptions));
 
 app.enable('trust proxy');
 
