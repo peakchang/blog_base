@@ -4,6 +4,10 @@ const app = express();
 
 app.set('port', process.env.PORT || 3092);
 
+app.use('/test', (req, res) => {
+    res.send('asldfjliasjdfajsdfjalisdfj')
+})
+
 import { handler } from "./front/build/handler.js"
 app.use(handler);
 
