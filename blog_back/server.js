@@ -21,7 +21,7 @@ import { subviewRouter } from './routes/subview.js';
 
 
 // import { apiRouter } from "./routes/exapi.js"
-app.set('port', process.env.PORT || 3020);
+app.set('port', process.env.PORT || 3091);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // ESM 오류 해결을 위해 __dirname, __filename 직접 변수 작성
