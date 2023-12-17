@@ -32,9 +32,12 @@ export const load = async ({ params, fetch, url }) => {
 
         for (let i = 0; i < posts.length; i++) {
             // 날짜
-            const date = new Date(posts[i].bo_created_at);
-            const dateStr = moment.tz(date, 'Asia/Seoul');
-            posts[i]["date_str"] = dateStr.format('YYYY-MM-DD HH:mm');
+            const getTimeStr = posts[i]['bo_updated_at'] ? posts[i]['bo_updated_at'] : posts[i]['bo_created_at']
+            const dateStr = moment.tz(getTimeStr, 'Asia/Seoul');
+            posts[i]["date_str"] = dateStr.format('YYYY-MM-DDTHH:mm:ssZ');
+
+
+
             // 첫번째 이미지
             const $ = cheerio.load(posts[i]["bo_content"]);
             const imageTag = $("img");
