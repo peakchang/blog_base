@@ -25,12 +25,14 @@ export async function GET({ url }) {
                 <title>${boardList[l]['bo_subject']}</title>
                 <link>${url.origin}/view/${boardList[l]['bo_id']}</link>
                 <description>${boardList[l]['content_txt']}</description>
-                <guid isPermaLink="true">${url.origin}/view/${boardList[l]['bo_id']}</guid>
-                <pubDate>${boardList[l]['bo_created_at']}</pubDate>
+                <guid>${url.origin}/view/${boardList[l]['bo_id']}</guid>
+                
             </item>
             `
             postXmlStr = postXmlStr + template
         }
+        // <guid isPermaLink="true">${url.origin}/view/${boardList[l]['bo_id']}</guid>
+        // <pubDate>${boardList[l]['bo_created_at']}</pubDate>
 
     } catch (error) {
         console.error(error.message);

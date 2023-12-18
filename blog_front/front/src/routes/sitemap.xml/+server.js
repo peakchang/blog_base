@@ -15,7 +15,8 @@ export async function GET({ url }) {
             // published_time
             const getTimeStr = boardList[i]['bo_updated_at'] ? boardList[i]['bo_updated_at'] : boardList[i]['bo_created_at']
             const dateStr = moment.tz(getTimeStr, 'Asia/Seoul');
-            const getDate = dateStr.format('YYYY-MM-DDTHH:mm:ssZ');
+            const getDate = dateStr.format('YYYY-MM-DD');
+            // const getDate = dateStr.format('YYYY-MM-DDTHH:mm:ssZ');
 
             let template = `
             <url>
