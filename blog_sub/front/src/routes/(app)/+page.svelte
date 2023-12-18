@@ -16,6 +16,9 @@
         <div>
             {subView.sb_subject}
         </div>
+        <div class="text-right">
+            {subView.date_str}
+        </div>
 
         <hr class="my-4" />
 
