@@ -34,8 +34,7 @@ export const load = async ({ fetch, url }) => {
         console.error(error.message);
     }
 
-
-
+    seoValue['title'] = subView.sb_subject
     const viewTextOnly = subView['sb_content'].replace(/<[^>]+>/g, ' ');
     const viewTextOnlyFilter = viewTextOnly.replace(/\s+/g, ' ').trim();
     seoValue['description'] = truncateTextTo100Chars(viewTextOnlyFilter);
@@ -63,7 +62,7 @@ export const load = async ({ fetch, url }) => {
 
 
 
-    return { subView }
+    return { subView, seoValue }
 }
 
 
