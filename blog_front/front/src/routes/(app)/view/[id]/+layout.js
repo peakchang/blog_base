@@ -24,10 +24,6 @@ export const load = async ({ params, url }) => {
         icon: `${url.origin}/favicon.png`,
     }
 
-
-
-
-
     try {
         const res = await axios.post(`${back_api}/main/detail`, { id })
 

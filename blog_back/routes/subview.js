@@ -10,10 +10,24 @@ const subviewRouter = express.Router();
 subviewRouter.post('/', async (req, res, next) => {
     console.log('여기는 들어와??');
     let status = true;
-    console.log(req.body);
-    console.log(req.body.subDomainName);
     const subDomainName = req.body.subDomainName
-    res.json({ status, subDomainName })
+    let subView = "";
+    console.log(subDomainName);
+    try {
+        const getSubDomainQuery = "SELECT * FROM sub_board WHERE sb_domain = ?";
+        console.log(getSubDomainQuery);
+        const getSubDomainCon = await sql_con.promise().query(getSubDomainQuery, [subDomainName]);
+        console.log(getSubDomainCon);
+        subView = getSubDomainCon[0][0]
+    } catch (error) {
+
+    }
+
+    console.log(subView);
+
+    console.log(subView);
+
+    res.json({ status, subDomainName, subView })
 })
 
 
