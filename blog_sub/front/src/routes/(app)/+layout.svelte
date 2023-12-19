@@ -1,8 +1,17 @@
 <script>
 	import "$src/app.pcss";
+	import SeoMeta from "$lib/components/SeoMeta.svelte";
+
+	let seoValue = {};
+	export let data;
+	$: data, setData();
+	function setData() {
+		seoValue = data.seoValue
+	}
 </script>
 
 <svelte:head>
+	<SeoMeta bind:seoValue />
 	<!-- SUIT 폰트 CSS -->
 	<link
 		href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css"
