@@ -3,9 +3,6 @@ import { sql_con } from '../back-lib/db.js'
 import fs from 'fs'
 const boardRouter = express.Router();
 import moment from "moment-timezone";
-const koreaTime = moment.tz('Asia/Seoul');
-
-
 
 boardRouter.post('/reply_regist', async (req, res, next) => {
 
@@ -102,7 +99,11 @@ boardRouter.post('/write', async (req, res, next) => {
     let status = true;
     const body = req.body
 
-    const now = koreaTime.format('YYYY-MM-DD HH:mm:ss');
+    // const now = koreaTime.format('YYYY-MM-DD HH:mm:ss');
+    // console.log(now);
+
+    let today = new Date();
+    const now = moment.tz(today, 'Asia/Seoul').format('YYYY-MM-DD HH:mm:ss');
     console.log(now);
 
     try {
