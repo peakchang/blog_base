@@ -6,47 +6,6 @@ import moment from "moment-timezone";
 const koreaTime = moment.tz('Asia/Seoul');
 
 
-boardRouter.post('/modify_api_img', async (req, res, next) => {
-    let status = 'success';
-    console.log(status);
-    let get_content
-
-    try {
-        const getId = req.body.getId;
-        const getContentQuery = "SELECT * FROM board WHERE bo_id = ?";
-        const getContent = await sql_con.promise().query(getContentQuery, [getId]);
-        get_content = getContent[0][0];
-
-
-        const chkContent = get_content.bo_content.includes('https://happy-toad.xyz')
-        console.log(chkContent);
-
-        if (chkContent) {
-            console.log('바꾼다잉!!!!');
-            const setContent = replaceDomains(get_content.bo_content);
-            console.log(setContent);
-            const setContentQuery = "UPDATE board SET bo_content = ? WHERE bo_id = ?";
-            await sql_con.promise().query(setContentQuery, [setContent, getId]);
-        }
-    } catch (error) {
-        console.error(error.message);
-    }
-
-    res.json({ status })
-})
-
-function replaceDomains(inputString) {
-    // 대체할 문자열 설정
-    var replacement = "https://api.happy-toad.xyz";
-
-    // 정규식 패턴 설정
-    var pattern = /https:\/\/happy-toad\.xyz/g;
-
-    // 문자열 내에서 정규식 패턴과 일치하는 모든 대상 문자열을 대체 문자열로 변경
-    var modifiedString = inputString.replace(pattern, replacement);
-
-    return modifiedString;
-}
 
 boardRouter.post('/reply_regist', async (req, res, next) => {
 
@@ -98,7 +57,6 @@ boardRouter.post('/delete', async (req, res, next) => {
     for (let i = 0; i < delImgList.length; i++) {
         if (delImgList[i]) {
             try {
-                console.log(delImgList[i]);
                 fs.unlinkSync(delImgList[i]);
             } catch (error) {
                 console.error(error.message);
@@ -125,11 +83,9 @@ boardRouter.post('/modify', async (req, res, next) => {
     }
 
     const delImgList = body.contentArr
-    console.log(delImgList);
     for (let i = 0; i < delImgList.length; i++) {
         if (delImgList[i]) {
             try {
-                console.log(delImgList[i]);
                 fs.unlinkSync(delImgList[i]);
             } catch (error) {
                 console.error(error.message);

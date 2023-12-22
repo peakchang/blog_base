@@ -98,6 +98,8 @@
                 </span>
                 <span> 글추가하기 </span>
             </button>
+
+            
         </div>
 
         {siteName} 최신글 리스트

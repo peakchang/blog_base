@@ -1,10 +1,14 @@
 import express from "express";
 import { sql_con } from '../back-lib/db.js'
 
+import moment from "moment-timezone";
+const koreaTime = moment.tz('Asia/Seoul');
+
 const mainRouter = express.Router();
 
+
+
 mainRouter.post('/get_modify', async (req, res, next) => {
-    console.log('모디퐈이!!!!!!!!!!');
     const id = req.body.id;
     let get_content
     let get_category
@@ -18,9 +22,6 @@ mainRouter.post('/get_modify', async (req, res, next) => {
     } catch (error) {
         console.error(error.message);
     }
-
-    console.log(get_content);
-    console.log(get_category);
 
     res.json({ get_content, get_category })
 })
@@ -39,7 +40,6 @@ mainRouter.post('/get_reply', async (req, res, next) => {
 })
 
 mainRouter.post('/detail', async (req, res, next) => {
-    console.log('디테일은 들어왔니?!?!?!');
     let content;
     const id = req.body.id
     let get_previous_post = []
@@ -49,7 +49,6 @@ mainRouter.post('/detail', async (req, res, next) => {
         const getContent = await sql_con.promise().query(getContentQuery, [id]);
         content = getContent[0][0];
 
-        console.log([content.bo_category, id]);
         const getPreviousPostQuery = "SELECT bo_id,bo_subject FROM board WHERE bo_category = ? AND bo_id < ? ORDER BY bo_id DESC LIMIT 1";
         const getPreviousPost = await sql_con.promise().query(getPreviousPostQuery, [content.bo_category, id]);
         get_previous_post = getPreviousPost[0]
@@ -61,9 +60,6 @@ mainRouter.post('/detail', async (req, res, next) => {
         console.error(error.message);
     }
 
-    console.log(content);
-    console.log(get_previous_post);
-    console.log(get_next_post);
     res.json({ content, get_previous_post, get_next_post })
 })
 
@@ -71,7 +67,7 @@ mainRouter.post('/menu', async (req, res, next) => {
     let get_category;
     let posts;
     const cateLink = req.body.link
-    console.log(cateLink);
+
     try {
         const getCategoryContentQuery = "SELECT * FROM board WHERE bo_category = ?"
         const getCategoryContent = await sql_con.promise().query(getCategoryContentQuery, [cateLink]);
@@ -95,11 +91,9 @@ mainRouter.get('/base', async (req, res, next) => {
         get_post_list = getPostList[0]
 
     } catch (error) {
-        console.log('back base error!!');
         console.error(error.message);
     }
 
-    console.log(get_post_list);
 
     res.json({ get_post_list })
 })
@@ -108,7 +102,7 @@ mainRouter.get('/', async (req, res, next) => {
 
 
 
-    res.json({  })
+    res.json({})
 })
 
 

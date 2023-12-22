@@ -36,6 +36,18 @@
 		const lastHref = href[href.length - 1];
 		goto(`/menu/${lastHref}`);
 	}
+
+	function testTimeFunc() {
+		console.log(`${back_api}/test_time`);
+		axios
+			.get(`${back_api}/test_time`)
+			.then((res) => {
+				console.log("성공~");
+			})
+			.catch((err) => {
+				console.log("실패~");
+			});
+	}
 </script>
 
 <svelte:head>
@@ -111,6 +123,12 @@
 			</span>
 			<span class="inline-block">사이트명 : {siteName} / </span>
 			<span class="inline-block">담당자 : 이수정 </span>
+			<button
+				class="bg-blue-500 focus:bg-blue-600 text-white text-xs px-2 py-1 rounded-lg"
+				on:click={testTimeFunc}
+			>
+				체크하기
+			</button>
 		</div>
 	</div>
 </div>

@@ -2,8 +2,32 @@ import express from "express";
 import { sql_con } from '../back-lib/db.js'
 import bcrypt from "bcrypt";
 import cheerio from "cheerio";
+
+import moment from "moment-timezone";
+const koreaTime = moment.tz('Asia/Seoul');
+
 const apiRouter = express.Router();
 
+apiRouter.get('/test_time', (req, res, next) => {
+
+    console.log('아예 못들어오는거야?!?!?!?');
+
+
+    const now1 = koreaTime.format('YYYY-MM-DD HH:mm:ss');
+    console.log(now1);
+    console.log("△ 코리아타임 --------------------------------");
+
+    const now2 = moment().format('YYYY-MM-DD HH:mm:ss')
+    console.log(now2);
+    console.log("△ 모먼트기본 --------------------------------");
+    let today = new Date();
+    const now3 = moment.tz(today, 'Asia/Seoul').format('YYYY-MM-DD HH:mm:ss');
+    console.log(now3);
+    console.log("△ 현재시간변환 --------------------------------");
+
+    res.json({ status: true })
+
+})
 
 apiRouter.post('/', async (req, res, next) => {
     const body = req.body;
@@ -18,7 +42,6 @@ apiRouter.post('/', async (req, res, next) => {
         console.error(error.message);
         validPassword = false;
     }
-    console.log(validPassword);
     res.json({ validPassword })
 })
 
@@ -46,7 +69,6 @@ apiRouter.post('/add_post_list', async (req, res, next) => {
     }
 
 
-    console.log(posts);
     if (posts.length < 10) {
         listStatus = false;
     }
